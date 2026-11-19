@@ -51,6 +51,18 @@
 
   document.getElementById('asof').textContent = 'Sealed snapshot ' + D.as_of + ' · ' + D.board_size + ' ranked · ' + D.live_size + ' market anchors';
 
+  function renderRibbon() {
+    var f = D.fit;
+    var better = Math.round((1 - f.cv.medianAbsLogError / f.cv.baselineMedianAbsLogError) * 100);
+    return node('div', { class: 'ribbon' },
+      node('span', { class: 'ribbon-k', text: 'Value model' }),
+      node('span', {
+        text: 'Ridge fit on ' + f.trainedOn + ' traded comps · held-out error ' + f.cv.medianAbsLogError.toFixed(2) +
+          ' log units, ' + better + '% below the flat-multiple baseline · ' + D.fit.cv.folds +
+          '-fold validation · 24 seeded bootstrap refits per rank band',
+      }));
+  }
+
   function renderKpis() {
     var f = D.fit;
     var k = node('div', { class: 'kpis' },
@@ -78,6 +90,11 @@
       node('div', { class: 'stat' }, node('div', { class: 'v', text: f.cv.rmse.toFixed(2) }), node('div', { class: 'l', text: 'held-out RMSE (log)' }))
     );
     return node('section', { class: 'method' }, left, right);
+  }
+
+  /** The full method panel: only shown on the Model & method tab, never above the board. */
+  function renderMethodPanel() {
+    return node('div', { class: 'panel' }, renderMethod());
   }
 
   function tabs() {
@@ -213,9 +230,9 @@
   function render() {
     app.innerHTML = '';
     app.appendChild(renderKpis());
-    app.appendChild(renderMethod());
+    app.appendChild(renderRibbon());
     app.appendChild(tabs());
-    var d = state.sel ? detailPanel() : state.tab === 'board' ? boardPanel() : state.tab === 'live' ? livePanel() : node('div', { class: 'panel' }, renderMethod());
+    var d = state.sel ? detailPanel() : state.tab === 'board' ? boardPanel() : state.tab === 'live' ? livePanel() : renderMethodPanel();
     app.appendChild(d || boardPanel());
     document.getElementById('foot').textContent =
       'Prelaunch Atlas · built from the sealed ' + D.as_of + ' DefiLlama snapshot · ' +

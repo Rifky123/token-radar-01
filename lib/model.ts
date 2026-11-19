@@ -51,7 +51,7 @@ export interface FitModel {
 /** The screen's own caps shape what a board may contain. */
 export const EARLY_ROWS = 220;
 export const LIVE_ROWS = 20;
-export const MODEL_VERSION = 'radar-comps-cv-v1';
+export const MODEL_VERSION = 'radar-comps-cv-v2';
 
 /** A farm step: one action, its cash cost, and the time it takes. */
 export interface FarmStep { text: string; cost: string; time: string; }

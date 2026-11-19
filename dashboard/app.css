@@ -41,6 +41,9 @@ main { max-width: 1280px; margin: 0 auto; padding: 26px 28px 60px; }
 .kpi .l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
 .kpi.teal { border-top-color: var(--teal); }
 
+.ribbon { display: flex; gap: 14px; align-items: baseline; background: var(--ink); color: #d8e2ee; padding: 9px 16px; margin-bottom: 10px; font-size: 12px; }
+.ribbon-k { font-size: 10px; text-transform: uppercase; letter-spacing: 1.4px; color: var(--amber); font-weight: 700; white-space: nowrap; }
+
 .method { background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); padding: 16px 20px; margin-bottom: 18px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 26px; }
 .method h2 { margin: 0 0 6px; font-size: 13px; text-transform: uppercase; letter-spacing: 1.4px; color: var(--amber); }
 .method p { margin: 0 0 8px; color: var(--ink-2); }
